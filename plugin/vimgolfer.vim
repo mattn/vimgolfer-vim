@@ -36,11 +36,12 @@ function! s:show_challenge(line)
   \  +map(s:to_source_lines(json.in.data), '"  ".v:val')
   \  +['', 'End file:', '']
   \  +map(s:to_source_lines(json.out.data), '"  ".v:val')
-  \  +['', '"q" to back list, "x" to challenge this']
+  \  +['', '"q" to back list', '"x" to challenge this', '"v" to open browser']
   \)
   setlocal modified nomodifiable
   nmapclear <buffer>
   exe "nnoremap <silent> <buffer> x :!vimgolf put ".id."<cr>"
+  exe "nnoremap <silent> <buffer> v :OpenBrowser http://www.vimgolf.com/challenges".id."<cr>"
   nnoremap <silent> <buffer> q :call <SID>show_recent_challenges()<cr>
   match none
   match Title /^\(Start file\|End file\):$/
@@ -54,7 +55,7 @@ function! s:show_recent_challenges()
   call setline('$', map(dom.childNode('channel').childNodes('item'),
   \ '"[".matchstr(v:val.childNode("guid").value(), ''[^/]\+$'')."] "'
   \ .'.v:val.childNode("title").value()')
-  \ +['', '"q" to quit, <cr> to show the challenge'])
+  \ +['', '"q" to quit', '<cr> to show the challenge'])
   setlocal modified nomodifiable
   nmapclear <buffer>
   nnoremap <silent> <buffer> <cr> :call <SID>show_challenge(getline('.'))<cr>
