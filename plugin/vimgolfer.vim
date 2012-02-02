@@ -1,4 +1,4 @@
-if !executable('vimgolf') || !get(g:, 'vimgolder_loaded', 0)
+if !executable('vimgolf') || get(g:, 'vimgolfer_loaded', 0)
   finish
 endif
 let g:vimgolfer_loaded = 1
