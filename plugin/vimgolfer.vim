@@ -19,7 +19,7 @@ endif
 
 function! s:to_source_lines(code)
   let lines = split(a:code, '\n')
-  return map(range(len(lines)), 'printf("%05d: %s", v:val, lines[v:val])')
+  return map(range(len(lines)), 'printf("%05d: %s", v:val+1, lines[v:val])')
 endfunction
 
 function! s:show_challenge(line)
