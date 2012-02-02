@@ -41,7 +41,7 @@ function! s:show_challenge(line)
   setlocal modified nomodifiable
   nmapclear <buffer>
   exe "nnoremap <silent> <buffer> x :!vimgolf put ".id."<cr>"
-  exe "nnoremap <silent> <buffer> v :OpenBrowser http://www.vimgolf.com/challenges".id."<cr>"
+  exe "nnoremap <silent> <buffer> v :OpenBrowser http://www.vimgolf.com/challenges/".id."<cr>"
   nnoremap <silent> <buffer> q :call <SID>show_recent_challenges()<cr>
   match none
   match Title /^\(Start file\|End file\):$/
