@@ -29,8 +29,8 @@ function! s:show_challenge(line)
   silent edit __VIMGOLFER__ | silent only!
   setlocal buftype=nofile bufhidden=hide noswapfile modifiable nocursorline
   silent %d _ | redraw!
-  let res = http#get('http://www.vimgolf.com/challenges/'.id)
-  let json = json#decode(res.content)
+  let res = webapi#http#get('http://www.vimgolf.com/challenges/'.id)
+  let json = webapi#json#decode(res.content)
   call setline('$',
   \  [title, '', 'Start file:', '']
   \  +map(s:to_source_lines(json.in.data), '"  ".v:val')
@@ -51,7 +51,7 @@ function! s:show_recent_challenges()
   silent edit __VIMGOLFER__ | silent only!
   setlocal buftype=nofile bufhidden=hide noswapfile modifiable cursorline
   silent %d _ | redraw!
-  let dom = xml#parseURL('http://feeds.vimgolf.com/latest-challenges')
+  let dom = webapi#xml#parseURL('http://feeds.vimgolf.com/latest-challenges')
   call setline('$', map(dom.childNode('channel').childNodes('item'),
   \ '"[".matchstr(v:val.childNode("guid").value(), ''[^/]\+$'')."] "'
   \ .'.v:val.childNode("title").value()')
